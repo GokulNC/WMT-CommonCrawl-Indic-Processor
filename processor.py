@@ -4,6 +4,9 @@ from glob import glob
 from tqdm import tqdm
 from mmh3 import hash128
 
+import warnings
+warnings.filterwarnings("ignore")
+
 from utils import langcode2script, in_script, get_digits, load_pickle, num_lines_in_file, langcode2name
 
 from indicnlp.tokenize.sentence_tokenize import sentence_split
