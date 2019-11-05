@@ -6,10 +6,6 @@ from mmh3 import hash128
 
 from utils import langcode2script, in_script, get_digits, load_pickle, num_lines_in_file, langcode2name
 
-## Setting Up Anoop's Indic NLP Lib
-# export PYTHONPATH=$PYTHONPATH:`pwd`/indic_nlp_library/src/
-# export INDIC_RESOURCES_PATH=`pwd`/indic_nlp_resources
-
 from indicnlp.tokenize.sentence_tokenize import sentence_split
 from indicnlp.tokenize.indic_tokenize import trivial_tokenize
 from indicnlp import common, loader
@@ -17,10 +13,10 @@ common.set_resources_path(os.environ['INDIC_RESOURCES_PATH'])
 loader.load()
 
 
-format_str = '%30s %10d %8d\n'
+format_str = '%30s %11d %9d\n'
 def save_result(fid, result_src, result, out_file, all_results=None):
     if fid==0: # Write Header
-        out_file.write('%30s %10s %8s\n' % ('FILENAME', 'TOKENS', 'SENTENCES'))
+        out_file.write('%30s %11s %9s\n' % ('FILENAME', 'TOKENS', 'SENTENCES'))
     
     out_file.write(format_str % (os.path.basename(result_src), result['tokens'], result['sentences']))
     if not all_results is None:
@@ -99,10 +95,10 @@ def parse_and_store(raw_folder, output_file, lang, start_index=0):
         out_mode = 'a'
     
     if not output_file: output_file = os.path.join(log_dir, 'parsed_final.txt')
-    f_out = open(output_file, out_mode, encoding='utf-8', buffering=16*1024*1024) #, errors='ignore')
+    f_out = open(output_file, out_mode, encoding='utf-8', buffering=128*1024*1024) #, errors='ignore')
     stats_file = os.path.join(log_dir, 'stats.log')
     stats_out = open(stats_file, out_mode, buffering=1)
-    print('WRITING OUTPUT to %s and LOGS to %s' % (output_file, stats_file))
+    print('WRITING OUTPUT to %s and LOGS to %s\n' % (output_file, stats_file))
     
     stats = {'tokens': 0, 'sentences': 0}
     total_tokens = 0
@@ -125,7 +121,7 @@ def parse_and_store(raw_folder, output_file, lang, start_index=0):
     unique_stats = {'tokens': len(token_set), 'sentences': len(sent_hashes)}
     save_result(-1, 'UNIQUE STATS', unique_stats, stats_out)
     
-    stats_out.write('\n%30s %10d\n' % ('TOTAL OBTAINED TOKENS', total_tokens))
+    stats_out.write('\n%30s %11d\n' % ('TOTAL OBTAINED TOKENS', total_tokens))
     f_out.close(); stats_out.close()
     return unique_stats
 
@@ -135,5 +131,6 @@ if __name__ == '__main__':
     parser.add_argument("--folder", required=True, type=str)
     parser.add_argument("--out_file", type=str)
     parser.add_argument("--lang_code", required=True, type=str)
+    parser.add_argument("--start_index", default=0, type=int)
     args = parser.parse_args()
-    parse_and_store(args.folder, args.out_file, args.lang_code)
+    parse_and_store(args.folder, args.out_file, args.lang_code, int(args.start_index))

@@ -1,4 +1,4 @@
-## WMT CommonCrawl raw data Deduplicator for Indian Languages
+## WMT CommonCrawl Raw Data Deduplicator for Indian Languages
 
 - The [language-wise raw data](http://data.statmt.org/ngrams/raw/) was obtained by Statistical Machine Translation ([statmt.org](https://statmt.org)).
 - For a few languages, the [deduped data is available](http://statmt.org/ngrams/deduped/) but not for Indian Languages.
@@ -11,9 +11,10 @@ Aim of this repo:
 Notes:
 - You can run in parallel for many Indian languages.
 - For Tamil, it took around half a day to dedupe.
-- Minimum compute required per language: 8GB RAM, 2 i5 cores, 100GB SSD
+- Minimum compute required per language: 8GB RAM, 2 i5 cores, 150-200GB SSD
 - To download all data, I used Axel, a CLI download accelerator (`sudo apt install axel`)
 - For supported Indian languages, check `utils.py`
+- Last tested on November 2019
 
 ### Requirements
 - Python 3
@@ -32,7 +33,7 @@ Notes:
 For instance, to get all Tamil raw data files:
 ```
 python3 download_list_gen.py --lang_code ta
-cd downloads/ta/
+cd downloads/tamil/
 ./downloader.sh
 cd -
 ```
@@ -42,7 +43,7 @@ where `ta` is the language code (ISO 639-1) for Tamil.
 
 To run for Tamil:
 ```
-python3 processor.py --lang_code ta --folder downloads/ta/
+python3 processor.py --lang_code ta --folder downloads/tamil/
 ```
 
 After the run, you will find the following files in `logs/tamil/`:
