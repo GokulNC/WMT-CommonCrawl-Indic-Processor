@@ -1,0 +1,10 @@
+indic_nlp_library/
+indic_nlp_resources/
+.ipynb_checkpoints/
+
+*.txt
+*.xz
+*.raw
+*.swp
+*.pyc
+*.pkl
