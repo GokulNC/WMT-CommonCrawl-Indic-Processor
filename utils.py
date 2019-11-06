@@ -41,7 +41,8 @@ scripts = [
     ('or', 'oriya'),
     ('bn', 'bengali'),
     ('ml', 'malayalam'),
-    ('pa', 'gurmukhi')
+    ('pa', 'gurmukhi'),
+    ('as', 'bengali')
 ]
 
 
