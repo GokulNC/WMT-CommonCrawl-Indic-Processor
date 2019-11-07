@@ -10,7 +10,7 @@ Aim of this repo:
 
 Notes:
 - You can run in parallel for many Indian languages.
-- For Tamil, it took around half a day to dedupe, but for Punjabi, it took around 1 hour.
+- For Tamil & Hindi, it took around half a day to dedupe, but for Punjabi, it took not even 1 hour.
 - Average compute required per language: 4-8GB RAM, 2 i5 cores, 100GB SSD
 - To download all data, I used Axel, a CLI download accelerator (`sudo apt install axel`)
 - For supported Indian languages, check `utils.py`
